@@ -1,0 +1,33 @@
+DROP TABLE IF EXISTS Book_of_reader;
+DROP TABLE IF EXISTS Reader;
+DROP TABLE IF EXISTS Book;
+
+
+CREATE TABLE Reader
+(
+    ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, --key
+    SN VARCHAR(100), --имя
+    Email VARCHAR(100) UNIQUE,
+    password_hash VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE Book
+(
+    ID INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, --key
+    Author VARCHAR(100) NOT NULL,
+    Book_name VARCHAR(100) NOT NULL,
+    Image VARCHAR(500),
+    Genre VARCHAR(20)
+);
+
+CREATE TABLE Book_of_reader
+(
+    ID_reader INTEGER REFERENCES Reader(ID), --ref
+    ID_book INTEGER REFERENCES Book(ID), --ref
+    Date_issue DATE,
+    PRIMARY KEY(ID_reader,ID_book)
+);
+
+GRANT ALL ON DATABASE lr3_ot TO user1;
+GRANT ALL ON SCHEMA public TO user1;
+GRANT ALL ON ALL TABLES IN SCHEMA public TO user1;

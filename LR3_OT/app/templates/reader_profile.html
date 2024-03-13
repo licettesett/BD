@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<header class="container d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    
+    <ul class="container">
+        <div class="alert alert-dark" role="alert">
+            <p style = "font-size: 24pt">
+                Выданные книги:
+            </p>
+        </div>
+    </u1>
+
+    </ul>
+        <div class="container">
+            <div class="row ">
+                <div class="card w-25">
+                    <img class="card-img-top" src="https://cdn-icons-png.flaticon.com/512/10/10742.png" alt="Reader card">
+                    <div class="card-body">
+                        <h4 class="card-title">Email: {{ reader.email }}</h4>
+                        <p class="card-text">
+                        Имя: {{reader.sn}}<br>  
+                        </p>
+                        
+                        {% if session['role'] == 'admin' %}
+                        <a href="{{ url_for('delete_reader_book', reader_id=reader.id) }}" class="btn btn-dark">Забрать книгу</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+                {%for book in books%}
+                <div class="card w-25">
+                    
+                    <img class="card-img-top" src= {{book[3]}} alt="book">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {{book[1]}}          
+                        </h4>
+            
+                        <p class="card-text"> 
+                            <b>Автор:</b> {{book[2]}}
+                            <br>
+                            <b>Жанр:</b> {{book[4]}}     
+                            <br>
+                            <b>ID:</b> {{book[0]}}     
+                        </p>
+                    </div>
+                </div>
+                
+                {%endfor%}
+            </div>
+        </div>
+    </u1>
+
+
+
+</header>
+{% endblock %}

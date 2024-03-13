@@ -1,0 +1,42 @@
+
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<div style="text-align: center;"> 
+
+    <div class="bg-white">
+        <div class="jumbotron" >
+            <h1 class="display-4">Привет {{ current_user.email }} !</h1> 
+            <br>
+            <p class="lead" style = "font-size: 22pt">
+                Это ЛР3
+            </p>
+
+
+            <hr class="my-2">
+            
+            <p style = "font-size: 16pt">
+                {% if session['role'] == 'admin' %}
+                Это профиль админа. <br><br>
+                {%endif%}
+
+                {% if session['role'] == 'reader' %}
+                В своем профиле вы можете посмотреть список выданных книг. <br><br>
+                {%endif%}
+
+                {% if not current_user.is_authenticated %}
+                Вы можете зарегистрироваться или войти как читатель.
+                {% endif %}
+            </p>
+            
+            
+        <div>
+    </div>
+
+    <br>
+    <img src="https://uxwing.com/wp-content/themes/uxwing/download/education-school/library-icon.png">
+
+</div>
+
+{% endblock %}

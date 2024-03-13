@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block app_content %} 
+
+<p><a name ="Top"></a></p>
+
+<p><a name ="Readers"></a></p>
+<h1>Читатели:</h1>
+<br>
+
+
+<div class="alert alert-dark" role="alert">
+    <p style = "font-size: 18pt">
+        Вы можете нажать на имя читателя, чтобы посмотреть или изменить его профиль.
+    </p>
+</div>
+
+<br>
+
+    <table class="table">        
+        <thead>
+            <tr>
+
+                
+              <th><h5>ID</h5></th>
+              <th><h5>Адрес почты</h5></th>
+              <th><h5>Имя</h5></th>
+
+            </tr>
+        </thead>
+
+        <tbody>  
+            {% for reader in readers  %}
+            <tr>
+                <th scope="row">{{reader[0]}}</th>  
+
+                <td>
+                    <a href="{{ url_for('reader_profile', reader_id=reader[0]) }}" class="nav-link px-2 link-primary">
+                        {{reader[2]}}
+                    </a>
+                   
+                </td>
+                <td>{{reader[1]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>   
+    
+<br>
+
+
+<button type="button" class="btn btn-link"><a href="#Top">Вернутся в начало</a></button>
+    
+
+{% endblock %}

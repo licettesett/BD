@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<div class="alert alert-dark" role="alert">
+    <p style = "font-size: 20pt">
+      <h1>Список книг:</h1>
+    </p>
+</div>
+ 
+<br>
+<a name="top"></a>
+
+    <table class="table">        
+        <thead>
+            <tr>
+              <th><h5>ID</h5></th>
+              <th><h5>Автор</h5></th>
+              <th><h5>Название книги</h5></th>     
+            </tr>
+        </thead>
+
+          {% for book in books  %}
+          
+          <tbody>
+            <tr>
+
+            <th scope="row">{{book[0]}}</th> 
+
+            <td>{{book[1]}} </td>
+            
+            <td>        
+                <button type="button" class="btn btn-link"><a href="#{{book[2]}}">{{book[2]}}</a></button>
+            </td>
+
+            </tr>
+
+          </tbody>
+
+        {% endfor %}
+      </table>    
+
+
+      <table class="table">   
+        <div class = "row">     
+          {% for book in books  %}
+          
+          <tbody>
+            <tr>
+            
+            <th scope="row">{{book[0]}}</th>
+            <td>        
+                <button type="button" class="btn btn-link"><a name="{{book[2]}}">{{book[2]}}</a></button>
+
+                <div class="card w-25">
+                  <img class="card-img-top" src={{book[3]}} alt="{{book[2]}} card">
+
+                  <div class="card-body">
+
+                    <h4 class="card-title">{{book[2]}}</h4>
+
+                    <p class="card-text">
+                        <p><b> Автор:</b> {{book[1]}} <br>
+                        <p><b> Жанр:</b> {{book[4]}} <br>
+                    </p>
+
+                    <a href="#top" class="btn btn-primary">В начало</a>
+
+                  </div>
+
+                </div>
+                <br>
+            </td>
+
+            </tr>
+
+          </tbody>
+
+        {% endfor %}
+      </table>    
+    
+{% endblock %}
