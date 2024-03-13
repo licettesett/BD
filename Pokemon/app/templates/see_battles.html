@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+
+<h1> Battles </h1><hr>
+
+<p><a name ="Top"></a></p>
+
+<button type="button" class="btn btn-link"><a href="#Upcoming">Upcoming</a></button>
+<button type="button" class="btn btn-link"><a href="#Finished">Finished</a></button>
+<br>
+
+<p><a name ="Upcoming"></a></p>
+<h2><u> Upcoming:</u> </h2><br>
+
+
+<div class="row ">
+ 
+ {%set ns = namespace (i = 0)%} 
+    {%for tr1 in trainers1u%}
+      {%set ids = ids_up_battle%}
+      {%set tr2 = trainers2u%}
+      {%set bU = battleInfUp%}
+
+      <div class="card w-50" >
+        
+        <h3 class="card-header">
+          BATTLE ID: {{ids[ns.i][0]}} 
+        </h3>
+        
+        <h4 class="card-header">          
+          TRAINER NAME: {{tr1.trainer_name}} 
+          (ID: {{tr1.id}}) 
+        </h4>
+
+        <h4 class="card-header">          
+          TRAINER NAME: {{tr2[ns.i].trainer_name}} 
+          (ID: {{tr2[ns.i].id}}) 
+        </h4>
+       
+        <div class="card-body">
+
+          <b><h5 class="card-title">Result:</b> not yet</h5> 
+
+          <b><p class="card-text">Date and time:</b> {{bU[ns.i][0][0]}}  </p>
+          <b><p class="card-text">Battlefield:</b> {{fieldsUp[ns.i][0]}}  </p>
+          </p><br>
+
+          {% if session['role'] == 'admin' %}
+          <a href="{{ url_for('set_result', battle_id = ids[ns.i][0]) }}" class="btn btn-primary">Set Result</a>
+          {%endif%}
+           
+        </div>
+        
+      </div>
+    
+  {%set ns.i = ns.i + 1%}
+    
+  {%endfor%}
+</br></br></br>
+<div> 
+<br>
+
+
+
+<button type="button" class="btn btn-link"><a href="#Top">Back to Top</a></button>
+
+<br><br><hr>
+<p><a name ="Finished"></a></p>
+<h2><u> Finished:</u> </h2><br>
+
+<div class="row ">
+ 
+  {%set ns.i = 0%} 
+     {%for tr1 in trainers1f%}
+       {%set ids = ids_fin_battle%}
+       {%set tr2 = trainers2f%}
+       {%set bF = battleInfFin%}
+       <div class="card w-50" >
+         
+         <h3 class="card-header">
+           BATTLE ID: {{ids[ns.i][0]}} 
+         </h3>
+         
+         <h4 class="card-header">          
+           TRAINER NAME: {{tr1.trainer_name}} 
+           (ID: {{tr1.id}}) 
+         </h4>
+ 
+         <h4 class="card-header">          
+           TRAINER NAME: {{tr2[ns.i].trainer_name}} 
+           (ID: {{tr2[ns.i].id}}) 
+         </h4>
+        
+         <div class="card-body">
+ 
+           <b><h5 class="card-title">Result:</b> the winner is {{bF[ns.i][0][1]}} ID </h5>
+ 
+           <b><p class="card-text">Date and time:</b> {{bF[ns.i][0][0]}}</p>
+           <b><p class="card-text">Battlefield:</b> {{fieldsFin[ns.i][0]}}  </p>
+           </p><br>
+ 
+           {% if session['role'] == 'admin' %}
+           <a href="{{ url_for('set_result', battle_id = ids[ns.i][0]) }}" class="btn btn-primary">Set Result</a>
+           {%endif%}
+            
+         </div>
+         
+       </div>
+     
+   {%set ns.i = ns.i + 1%}
+     
+   {%endfor%}
+ </br></br></br>
+ <div> 
+ <br>
+
+<button type="button" class="btn btn-link"><a href="#Top">Back to Top</a></button>
+
+{% endblock %}

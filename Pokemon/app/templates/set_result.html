@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h2>Set result of Battle № {{b_id}} </h2>
+    <br>
+    {{ wtf.quick_form(form) }}
+
+    <br>
+    <a href="{{ url_for('see_battles') }}" class="nav-link px-2 link-dark">
+        <button type="button" class="btn btn-outline-primary me-2">Come back to Battles</button>
+    </a>
+
+{% endblock %}

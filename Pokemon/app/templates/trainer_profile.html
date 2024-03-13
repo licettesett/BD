@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+    <div class="card w-50">
+        <img class="card-img-top" src="https://www.beano.com/wp-content/uploads/2021/03/image-38.jpeg?strip=all&quality=86&w=752" alt="Trainer card">
+        <div class="card-body">
+          <h3 class="card-title">Trainer: {{trainer.trainer_name}}</h3>
+          
+          {%if session['role'] == 'spectator'%}
+          <button type="button" class="btn btn-danger">
+            Be my favorite!
+          </button>
+          {%endif%}
+
+          <p class="card-text">
+
+            {% if session['role'] == 'trainer' %}
+            <b>email:</b> {{ trainer.email }}<br>
+            {%endif%}
+            <b>trainer ID:</b> {{ trainer.id }}<br>
+            <b>favorite pokemon:</b> {{ trainer.fav_pokemon }}<br>
+
+            <b>biography:</b> {{ trainer.biography }}<br>
+            <b>all battles:</b> 
+            {%for inv in invitations%}
+            {{inv[0]}} 
+            {%endfor%} <br>
+            <b>finished battles:</b> 
+            {%for fin in finished%}
+            {{fin[0]}} 
+            {%endfor%} <br>
+          </p>
+          {% if session['role'] == 'trainer' and  current_user.id == trainer.id%}
+          <a href="{{ url_for('edit_trainer_profile') }}" class="btn btn-primary">Edit profile</a>
+
+          {%if in_battle%}
+          <a href="{{ url_for('all_trainer_invitations', trainer_id=current_user.id) }}" class="btn btn-warning">New battle invitation!</a>
+          {%endif%}
+
+          {%endif%}
+        </div>
+      </div>
+
+<br>
+
+<h2> All my pokemons: </h2><br>
+
+  <div class="row ">
+        
+        {%for pok in pokemons%}
+        <div class="card w-25">
+          
+          <img class="card-img-top" src= {{pok[2]}} alt="Pokemon1">
+          <div class="card-body">
+
+            <h4 class="card-title">
+              {{pok[0]}}          
+            </h4>
+
+            <p class="card-text"> 
+              <b>Тип:</b> {{pok[3]}}             
+            </p>
+      
+          </div>
+  
+        </div>
+      
+      {%endfor%}
+  <div>
+
+<br><hr>
+<h2>My Pokemons in the upcoming battle:</h2><br>
+
+<div class="row ">
+        
+  {%for b_pok in battle_pokemons%}
+  <div class="card w-25">
+    
+    <img class="card-img-top" src= {{b_pok[2]}} alt="Pokemon1">
+    <div class="card-body">
+
+      <h4 class="card-title">
+        {{b_pok[0]}}          
+      </h4>
+
+      <p class="card-text"> 
+        <b>Тип:</b> {{b_pok[3]}}             
+      </p>
+
+    </div>
+
+  </div>
+
+{%endfor%}
+<div>
+{% endblock %}

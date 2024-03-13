@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h2>Create invitation</h2>
+    {{ wtf.quick_form(form) }}
+
+    <br> <hr>
+
+<p><a name ="Trainers"></a></p>
+<h1>Trainers:</h1>
+    <table class="table">        
+        <thead>
+            <tr>
+            
+              <th><h5>ID</h5></th>
+              <th><h5>Trainer name</h5></th>
+              <th><h5>Email</h5></th>
+              <th><h5>In battle now</h5></th>
+
+            </tr>
+        </thead>
+
+        <tbody>  
+            {% for user in usersT  %}
+            <tr>
+                
+                <th scope="row">{{user[0]}}</th>  
+                <td>{{user[1]}}</td>
+                <td>{{user[2]}}</td>
+                <td>{{user[6]}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>   
+    
+<br>
+
+
+{% endblock %}

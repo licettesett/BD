@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>Registration</h1><br>
+
+    <div class="alert alert-warning" role="alert">
+        <strong>*Six fields</strong> after the email only are for the <strong>TRAINER</strong>.<br>
+        <strong>*</strong>If you are a <strong>SPECTATOR</strong>, then it is <strong>NOT NECESSARY</strong> to fill them out.
+      </div>
+
+    
+    {{ wtf.quick_form(form) }}
+
+    <p>Here you can see the existing types of Pokemon: <a href="{{ url_for('pokemon_pedia') }}">PokemonPedia.</a></p>
+
+{% endblock %}

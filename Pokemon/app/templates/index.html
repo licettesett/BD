@@ -1,0 +1,38 @@
+
+{% extends "base.html" %}
+
+{% block app_content %}
+
+<div style="text-align: center;"> 
+
+    <div class="bg-white">
+        <div class="jumbotron" >
+            <h1 class="display-3">Hello, dear {{ current_user.email }} !</h1>
+            <p class="lead" style = "font-size: 20pt">
+                This app is based on the Pokemon game series
+            </p>
+
+            <hr class="my-2">
+            
+            <p style = "font-size: 16pt">
+                {% if session['role'] == 'admin' %}
+                I wish you good work, Admin! <br><br>
+                {%endif%}
+            
+                {% if not current_user.is_authenticated %}
+                You can register or log in as a trainer if you have a pokemon,<br>
+                Or as a spectator if you like Pokemon battles.<br> <br>
+                {% endif %}
+            </p>
+            
+            
+        <div>
+    </div>
+
+
+    <br>
+    <img src="https://seeklogo.com/images/P/Pokemon-logo-497D61B223-seeklogo.com.png">
+
+</div>
+
+{% endblock %}

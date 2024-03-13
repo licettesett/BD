@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div style="text-align: center;"> 
+    <h1 class="display-3">
+        Welcome to PokemonPedia! 
+        <img src="https://www.pngmart.com/files/22/Surprised-Pikachu-PNG-Image.png" width = 120 height = 100> 
+    </h1> 
+</div> 
+
+<br> 
+
+<div class="alert alert-dark" role="alert">
+    <p style = "font-size: 20pt">
+        Here is information about existing and currently known Pokemons
+    </p>
+</div>
+
+ 
+<br>
+<a name="top"></a>
+
+    <table class="table">        
+        <thead>
+            <tr>
+              <th><h5>№</h5></th>
+              <th><h5>Pokemon kind name</h5></th>     
+            </tr>
+        </thead>
+
+          {% for kind in kinds  %}
+          
+          <tbody>
+            <tr>
+
+            <th scope="row">{{kind[1]}}</th> 
+            <td>        
+                <button type="button" class="btn btn-link"><a href="#{{kind[0]}}">{{kind[0]}}</a></button>
+            </td>
+
+            </tr>
+
+          </tbody>
+
+        {% endfor %}
+      </table>    
+
+
+      <table class="table">   
+        <div class = "row">     
+          {% for kind in kinds  %}
+          
+          <tbody>
+            <tr>
+            
+            <th scope="row">{{kind[1]}}</th>
+            <td>        
+                <button type="button" class="btn btn-link"><a name="{{kind[0]}}">{{kind[0]}}</a></button>
+
+                <div class="card w-50">
+                  <img class="card-img-top" src={{kind[3]}} alt="{{kind[0]}} card">
+
+                  <div class="card-body">
+
+                    <h4 class="card-title">{{kind[0]}}</h4>
+
+                    <p class="card-text">
+                      {{kind[2]}}
+                      <p><b> Тип:</b> {{kind[4]}} <br>
+                    </p>
+
+                    <a href="#top" class="btn btn-primary">Back to Top</a>
+
+                  </div>
+
+                </div>
+                <br>
+            </td>
+
+            </tr>
+
+          </tbody>
+
+        {% endfor %}
+      </table>    
+    
+{% endblock %}

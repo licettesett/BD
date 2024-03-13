@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+    <h2>Edit favourite trainer</h2>
+
+    {{ wtf.quick_form(form) }}
+
+    <br>
+    <a href="{{ url_for('spectator_profile', spectator_id=current_user.id) }}">
+        <button type="button" class="btn btn-outline-primary me-2">Back to profile</button>
+    </a>
+<br><br>
+
+    *You can find ID of your favorite trainer here:
+    <a href="{{ url_for('see_trainers') }}">View Trainers</a>
+{% endblock %}

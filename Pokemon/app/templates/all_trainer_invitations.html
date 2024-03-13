@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+
+<h2> NEW battle invitation: </h2><br>
+
+  <div class="row ">
+        
+    {%for inf in battleInf%}
+
+    <div class="card w-50" >
+        <h3 class="card-header">You invited on POKEMON BATTLE</h3>
+        <div class="card-body">
+
+          <h4 class="card-title">With trainer {{enemy_name}} (ID: {{inf[4]}})</h4>
+
+          <b><p class="card-text">Date and time:</b>  {{inf[0]}} </p>
+          <b><p class="card-text">Battlefield:</b> {{battlefield_adress}}  </p>
+          <b><p class="card-text">My fighting pokemons:</b> 
+            {%for pok in battle_pok%}
+            {{pok[0]}}  
+            {%endfor%}
+          </p><br>
+
+          {%if have_pok_in_battle == False%}
+          <a href="{{ url_for('fill_trainer_invitation') }}" class="btn btn-primary">Fill invitation</a>
+          {%endif%}
+
+        </div>
+      </div>
+
+    {%endfor%}
+      
+  <div>
+    <br>
+    <a href="{{ url_for('trainer_profile', trainer_id=current_user.id) }}">
+      <button type="button" class="btn btn-outline-primary me-2">
+        Back to profile
+      </button>
+    </a>
+
+{% endblock %}
+

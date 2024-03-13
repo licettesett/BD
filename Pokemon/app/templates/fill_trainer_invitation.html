@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+
+<h2>Fill battle invitation</h2>
+
+<div class="alert alert-warning" role="alert">
+    <strong>*Be careful!</strong> The invitation can be filled out only <strong>ONCE</strong>, 
+    then it cannot be changed.<br>
+</div>
+
+<br><br>
+
+{{ wtf.quick_form(form) }}
+
+<br>
+<a href="{{ url_for('trainer_profile', trainer_id=current_user.id) }}">
+    <button type="button" class="btn btn-outline-primary me-2">
+        Back to profile
+    </button>
+</a>
+{% endblock %}
